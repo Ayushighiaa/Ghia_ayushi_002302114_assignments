@@ -159,7 +159,7 @@ public class CreateProfileJPanel extends javax.swing.JPanel {
                 return;
             
         
-           return;
+    
             }
         Person person = personDirectory.addPerson();
 

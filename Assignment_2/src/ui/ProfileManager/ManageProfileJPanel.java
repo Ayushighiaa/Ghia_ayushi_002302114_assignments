@@ -207,7 +207,7 @@ public class ManageProfileJPanel extends javax.swing.JPanel {
             
             Person selectedProfile =(Person) jTable1.getValueAt(selectedRow,0);
             
-            ViewProfileJPanel panel = new ViewProfileJPanel(userProcessContainer, PersonDirectory, selectedProfile;
+            ViewProfileJPanel panel = new ViewProfileJPanel(userProcessContainer, PersonDirectory, selectedProfile);
             userProcessContainer.add("ViewProfileJPanel",panel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -226,15 +226,16 @@ private void populateTable(Object Person) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
     model.setRowCount(0);
     
-    for(Person acc:PersonDirectory.getAccounts()){
+    for(Person p:personDirectory.getPerson()){
     
         Object[] row = new Object[5];
-        row[0]=acc;
-        row[1]=acc.getfirstName();
-        row[2]=acc.getLastName();
-        row[3]=acc.getAge();
-        row[4]=acc.getGender();
-        row[5]=acc.getEmail();
+        row[0]=p;
+        row[1]=p.getFirstName();
+        row[2]=p.getLastName();
+        row[3]=p.getAge();
+        row[4]=p.getGender();
+        row[5]=p.getEmail();
+        
         
         model.addRow(row);
     

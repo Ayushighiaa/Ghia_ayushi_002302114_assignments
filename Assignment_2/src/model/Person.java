@@ -12,9 +12,11 @@ public class Person {
     
     private String firstName;
     private String lastName;
-    private int age;
+    private int ssn;
+    private double age;
     private String gender;
     private String email;
+    private Address address;
 
     public String getFirstName() {
         return firstName;
@@ -32,15 +34,23 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public int getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(int ssn) {
+        this.ssn = ssn;
+    }
+
+    public double getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(double age) {
         this.age = age;
     }
 
-    public String getGender(String female) {
+    public String getGender() {
         return gender;
     }
 
@@ -56,34 +66,16 @@ public class Person {
         this.email = email;
     }
 
-    void remove(Person person) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Address getAddress() {
+        return address;
     }
 
-    public void setfirstName(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void getLastName(String luhadia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void getAge(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getAccountNumber() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getfirstName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getGender() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setAddress(Address address) {
+        this.address = address;
     }
     
-    
+   
+
+   
     
 }

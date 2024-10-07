@@ -19,16 +19,14 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-      private PersonDirectory personDirectory;
-      
-      public MainJFrame() {
+    private PersonDirectory personDirectory;
+
+    public MainJFrame() {
         initComponents();
         
-        this.personDirectory= new PersonDirectory();
-       
-      
-      
-      
+
+        this.personDirectory = new PersonDirectory();
+
     }
 
     /**
@@ -94,10 +92,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ProfileMngWorkArea panel= new ProfileMngWorkArea(userProcessContainer,personDirectory);
-        
-        userProcessContainer.add("AccountMngWorkAreaJPanel",panel);
-        
+        ProfileMngWorkArea panel = new ProfileMngWorkArea(userProcessContainer, personDirectory);
+
+        userProcessContainer.add("AccountMngWorkAreaJPanel", panel);
+
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -137,6 +135,54 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
 
+    private void generateDemo() {
+
+        // Example 1
+        Person firstPerson = personDirectory.addPerson();
+        firstPerson.setFirstName("Alice");
+        firstPerson.setLastName("Johnson");
+        firstPerson.setAge(30);
+        firstPerson.setSsn(987654321);
+        
+
+            // Example 2
+            Person secondPerson = personDirectory.addPerson();
+                    secondPerson.setFirstName("Bob");
+                    secondPerson.setLastName("Smith");
+                    secondPerson.setAge(28);
+                    secondPerson.setSsn(123456789);
+                    
+
+            // Example 3
+                    Person thirdPerson = personDirectory.addPerson();
+                    thirdPerson.setFirstName("Catherine");
+                    thirdPerson.setLastName("Lee");
+                    thirdPerson.setAge(35);
+                    thirdPerson.setSsn(112233445);
+                    
+
+            // Example 4
+                    Person fourthPerson = personDirectory.addPerson();
+                    fourthPerson.setFirstName("David");
+                    fourthPerson.setLastName("Williams");
+                    fourthPerson.setAge(22);
+                    fourthPerson.setSsn(998877665);
+                   
+
+            // Example 5
+                    Person fifthPerson = personDirectory.addPerson();
+                    fifthPerson.setFirstName("Emma");
+                    fifthPerson.setLastName("Brown");
+                    fifthPerson.setAge(27);
+                    fifthPerson.setSsn(556677889);
+             
+
+    
+    
+    
+    
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TopjPanel;
     private javax.swing.JButton jButton1;
@@ -144,16 +190,4 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
 
-
 }
-
-
-
-
-
-
-
-
-
-
-

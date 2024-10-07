@@ -517,11 +517,14 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_WtxtState2jTextField8ActionPerformed
  private void refreshTextFields(){
+     
         txtFirstName.setText(person.getFirstName());
         jTextField1.setText(person.getLastName());
         jTextField2.setText(Double.toString(person.getAge()));
         jTextField3.setText(person.getGender());
         jTextField4.setText(person.getEmail());
+        
+        
  
         HtxtStreetAddress.setText(add.gethStreet());
         HtxtUnitNo.setText(add.gethUnitNum());
@@ -544,6 +547,9 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
     
     
     }
+ 
+ 
+ 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -43,13 +43,14 @@ public class PersonDirectory {
    
     
     
-        public Person searchPerson(String search){
+    public Person searchPerson(String search){
         for (Person p:persons){
             Address add = p.getHomeAddress();
             if(p.getFirstName().contains(search) || p.getLastName().contains(search) ||
                add.gethStreet().contains(search) || String.valueOf(add.gethUnitNum()).contains(search) || add.gethCity().contains(search) || add.gethState().contains(search) || String.valueOf(add.gethZipCode()).contains(search) || String.valueOf(add.gethPhone()).contains(search)){
                 return p;
         }
+          
      
     }
 
@@ -81,8 +82,13 @@ public class PersonDirectory {
         return addresses;
     }
      
-    public void setAddress(ArrayList<Address> address)  {
-       this.addresses= address;
+ 
+    public void setAddress(){
+        
+        
+        
+        
+
     }
     
     public Address addAddress(){

@@ -19,13 +19,13 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-      private PersonDirectory persondirectory;
+      private PersonDirectory personDirectory;
       
       public MainJFrame() {
         initComponents();
         
-        this.persondirectory= new PersonDirectory();
-        generateDemoData();
+        this.personDirectory= new PersonDirectory();
+       
       
       
       
@@ -63,7 +63,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(TopjPanelLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jButton1)
-                .addContainerGap(458, Short.MAX_VALUE))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         TopjPanelLayout.setVerticalGroup(
             TopjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,11 +82,11 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
         );
 
         pack();
@@ -94,8 +94,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         ProfileMngWorkArea= new ProfileMngWorkArea(userProcessContainer,PersonDirectory);
-        Component panel;
+        ProfileMngWorkArea panel= new ProfileMngWorkArea(userProcessContainer,personDirectory);
+        
         userProcessContainer.add("AccountMngWorkAreaJPanel",panel);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -144,34 +144,16 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
 
-private void generateDemoData() {
-        
-     Person newPerson = PersonDirectory.addperson();
-     newPerson.setfirstName ("Tanisha");
-     newPerson.getLastName("Luhadia");
-     newPerson.getAge("22");
-     newPerson.getGender("Female");
-    
-     
-     Person anotherNewPerson = PersonDirectory.addperson();
-     anotherNewPerson.setFirstName("Shruvi");
-     anotherNewPerson.setLastName("Shah");
-     anotherNewPerson.setAge(22);
-     anotherNewPerson.setEmail("shruvishah@gmail.com");
-    }
-
-    private void generateDemoDate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
-
-
-
-
-
-
-
-
-
 
 }
+
+
+
+
+
+
+
+
+
+
+

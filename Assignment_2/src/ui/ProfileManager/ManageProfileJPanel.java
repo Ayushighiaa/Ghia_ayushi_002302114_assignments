@@ -9,6 +9,7 @@ import java.awt.Container;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.Address;
 import model.Person;
 import model.PersonDirectory;
 
@@ -26,8 +27,10 @@ public class ManageProfileJPanel extends javax.swing.JPanel {
      */
     public ManageProfileJPanel(JPanel userProcessContainer,PersonDirectory personDirectory) {
         initComponents();
+       
         this.userProcessContainer=userProcessContainer;
         this.personDirectory= personDirectory;
+        populateTable();
     }
 
     /**
@@ -141,28 +144,24 @@ public class ManageProfileJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(!jButton3.getText().isBlank()){
-            String firstName = jButton3.getText();
-            Person foundPerson = personDirectory.searchPerson(firstName);
+       if (!jTextField1.getText().isBlank()){
             
-            if(foundPerson!=null){
+            String search = jTextField1.getText();
+            Person foundPerson = personDirectory.searchPerson(search);
             
-                ViewProfileJPanel panel = new ViewProfileJPanel(userProcessContainer, personDirectory ,foundPerson);
-                userProcessContainer.add("ViewProfileJPanel",panel);
+            if (foundPerson != null){
+                
+                ViewProfileJPanel panel = new ViewProfileJPanel(userProcessContainer, personDirectory, foundPerson);
+                userProcessContainer.add("ViewPersonJPanel",panel);
                 CardLayout layout = (CardLayout) userProcessContainer.getLayout();
                 layout.next(userProcessContainer);
-                
+            } else{
+                JOptionPane.showMessageDialog(null, "Person not found. Please check the details entered and try again", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             
-            else{
-                JOptionPane.showMessageDialog(null, "Account not found. Please check and try again");
-                
-            
-            }
-           
-        
-        }else{JOptionPane.showMessageDialog(null, "Please type account number to view");}
-
+        } else{
+            JOptionPane.showMessageDialog(null, "Please type the details of the person you are looking for", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -177,72 +176,86 @@ public class ManageProfileJPanel extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
-        if(selectedRow>=1){
-        
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult= JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning",dialogButton);
-            if(dialogResult==JOptionPane.YES_OPTION){
-            
-                Person selectedProfile =(Person) jTable1.getValueAt(selectedRow,0);
-                PersonDirectory.deleteAccount(selectedProfile);
-               
-                
-            
-            }
-            else{
-            
-                JOptionPane.showMessageDialog(null, "Please select an Account");
-            
-            }
-        
+    
+                                      
+    int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow >= 0) {
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure?", "Warning", dialogButton);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+              // Assuming email is in column 4
+            Person selectedProfile =(Person) jTable1.getValueAt(selectedRow,0);  // Assuming email is in column 4
+             // Search by unique identifier
+
+
+            personDirectory.deletePerson(selectedProfile);
+            populateTable();  // Refresh the table after deletion
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "Please select a profile to delete");
+    
+}
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int selectedRow=jTable1.getSelectedRow();
-        if(selectedRow>=0){
-       
-            
-            Person selectedProfile =(Person) jTable1.getValueAt(selectedRow,0);
-            
-            ViewProfileJPanel panel = new ViewProfileJPanel(userProcessContainer, PersonDirectory, selectedProfile);
-            userProcessContainer.add("ViewProfileJPanel",panel);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-             }
-        
-        else{
-            
-                JOptionPane.showMessageDialog(null, "Please select an Account", "warning", JOptionPane.WARNING_MESSAGE);
-            
-            }
+                                            
+    int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow >= 0) {
+        // Assuming email is in column 4
+        Person selectedProfile =(Person) jTable1.getValueAt(selectedRow,0);
+        ViewProfileJPanel panel = new ViewProfileJPanel(userProcessContainer, personDirectory, selectedProfile);
+        userProcessContainer.add("ViewProfileJPanel", panel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    } else {
+        JOptionPane.showMessageDialog(null, "Please select a profile to view", "Warning", JOptionPane.WARNING_MESSAGE);
+    
+}
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-private void populateTable(Object Person) {
-        
-        
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0);
-    
-    for(Person p:personDirectory.getPerson()){
-    
-        Object[] row = new Object[5];
-        row[0]=p;
-        row[1]=p.getFirstName();
-        row[2]=p.getLastName();
-        row[3]=p.getAge();
-        row[4]=p.getGender();
-        row[5]=p.getEmail();
-        
-        
-        model.addRow(row);
-    
-    }
+private void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);  // Clear existing rows
 
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    for (Person p : personDirectory.getPerson()) {
+        Object[] row = new Object[8];  // Adjust the size according to the columns
+
+        // Assuming the person object has an address object, you can get the address details like this:
+      // Get home and work addresses using the new methods
+        Address homeAddressObj = p.getHomeAddress();
+        Address workAddressObj = p.getWorkAddress();
+
+        // Construct the home address string
+        String homeAddress = (homeAddressObj != null) 
+            ? homeAddressObj.gethStreet() + ", Unit " + homeAddressObj.gethUnitNum() + ", " + 
+              homeAddressObj.gethCity() + ", " + homeAddressObj.gethState() + ", " + 
+              homeAddressObj.gethZipCode() + ", Phone: " + homeAddressObj.gethPhone()
+            : "No home address available";
+
+        // Construct the work address string
+        String workAddress = (workAddressObj != null) 
+            ? workAddressObj.getwStreet() + ", Unit " + workAddressObj.getwUnitNum() + ", " + 
+              workAddressObj.getwCity() + ", " + workAddressObj.getwState() + ", " + 
+              workAddressObj.getwZipCode() + ", Phone: " + workAddressObj.getwPhone()
+            : "No work address available";
+
+        // Populate the row with the person's data
+        row[0] = p;
+        row[1]=p.getFirstName();
+        row[2] = p.getLastName();
+        row[3] = p.getAge();
+        row[4] = p.getGender();
+        row[5] = p.getEmail();
+        row[6] = homeAddress;  // Home address column
+        row[7] = workAddress;  // Work address column
+        
+        model.addRow(row);  // Add the row to the table model
     }
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

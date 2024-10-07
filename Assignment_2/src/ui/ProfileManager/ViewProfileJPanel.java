@@ -7,6 +7,7 @@ package ui.ProfileManager;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Address;
 import model.Person;
 import model.PersonDirectory;
 
@@ -18,6 +19,7 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private PersonDirectory personDirectory;
     private Person person=new Person();
+    private Address add=new Address();
 
     /**
      * Creates new form ViewProfileJPanel
@@ -26,10 +28,13 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
      * @param person
      */
     public ViewProfileJPanel(JPanel Container, PersonDirectory personDirectory,Person person) {
+        initComponents();
         userProcessContainer=Container;
+        
         this.personDirectory = personDirectory;
         this.person = person;
-        initComponents();
+       
+        refreshTextFields();
     }
 
     /**
@@ -54,10 +59,6 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
         jTextField4 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         HtxtStreetAddress = new javax.swing.JTextField();
@@ -117,10 +118,6 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Home Address");
-
-        jLabel2.setText("Work Address");
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Work Address\n"));
 
@@ -322,21 +319,10 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(70, 70, 70)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(49, 49, 49))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(158, 158, 158)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(158, 158, 158)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -366,14 +352,6 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(43, 43, 43)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
@@ -423,21 +401,20 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
         String age = jTextField2.getText();
         String gender = jTextField3.getText();
         String email = jTextField4.getText();
-        String workaddress = jTextField6.getText();
         String hStreet = HtxtStreetAddress.getText();
         String hUnitNum = HtxtUnitNo.getText();
         String hCity = HtxtCity.getText();
         String hState = HtxtState.getText();
         Long hZipCode = Long.parseLong(HtxtZip.getText());
         double hphone = Double.parseDouble(HtxtPhoneNo.getText());
-        String wStreet = WtxtStreetAddress1.getText();
-        String wUnitNo = WtxtUnitNo1.getText();
-        double wPhone  = Double.parseDouble(WtxtPhoneNo1.getText());
-        String wCity = WtxtCity2.getText();
-        String WState = WtxtState1.getText();
-        long wZipCode = Long.parseLong(WtxtZip.getText());
+        String wStreet = WtxtStreetAddress2.getText();
+        String wUnitNo = WtxtUnitNo2.getText();
+        double wPhone  = Double.parseDouble(WtxtPhoneNo2.getText());
+        String wCity = WtxtCity3.getText();
+        String WState = WtxtState2.getText();
+        long wZipCode = Long.parseLong(WtxtZip1.getText());
         
-        if (firstName.isBlank() || lastName.isBlank() || age.isBlank() || gender.isBlank() || email.isBlank() || 
+        if (firstName.isBlank() || lastName.isBlank() || age.isBlank() || gender.isBlank() || email.isBlank())
         {
             JOptionPane.showMessageDialog(this,"All fields are mandatory.","Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -445,17 +422,74 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
          
         person.setFirstName(firstName);
         person.setLastName (lastName);
-        person.setAge(age);
+        person.setAge(Double.parseDouble(age));
         person.setGender(gender);
         person.setEmail(email);
+        add.sethCity(hCity);
+        add.sethPhone(hphone);
+        add.sethState(hState);
+        add.sethStreet(hStreet);
+        add.sethUnitNum(hUnitNum);
+        add.sethZipCode(hZipCode);
+        add.setwCity(wCity);
+        add.setwPhone(wPhone);
+        add.setwState(WState);
+        add.setwStreet(wStreet);
+        add.setwUnitNum(wUnitNo);
+        add.setwZipCode(wZipCode);
         
         
-        JOptionPane.showMessageDialog(null, "Account Successfully Updated");
+        JOptionPane.showMessageDialog(null, "Account Successfully Saved!");
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+             String firstName = txtFirstName.getText();  
+        String lastName = jTextField1.getText();
+        String age = jTextField2.getText();
+        String gender = jTextField3.getText();
+        String email = jTextField4.getText();
+        String hStreet = HtxtStreetAddress.getText();
+        String hUnitNum = HtxtUnitNo.getText();
+        String hCity = HtxtCity.getText();
+        String hState = HtxtState.getText();
+        Long hZipCode = Long.parseLong(HtxtZip.getText());
+        double hphone = Double.parseDouble(HtxtPhoneNo.getText());
+        String wStreet = WtxtStreetAddress2.getText();
+        String wUnitNo = WtxtUnitNo2.getText();
+        double wPhone  = Double.parseDouble(WtxtPhoneNo2.getText());
+        String wCity = WtxtCity3.getText();
+        String WState = WtxtState2.getText();
+        long wZipCode = Long.parseLong(WtxtZip1.getText());
+        
+        if (firstName.isBlank() || lastName.isBlank() || age.isBlank() || gender.isBlank() || email.isBlank())
+        {
+            JOptionPane.showMessageDialog(this,"All fields are mandatory.","Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+         
+        person.setFirstName(firstName);
+        person.setLastName (lastName);
+        person.setAge(Double.parseDouble(age));
+        person.setGender(gender);
+        person.setEmail(email);
+        add.sethCity(hCity);
+        add.sethPhone(hphone);
+        add.sethState(hState);
+        add.sethStreet(hStreet);
+        add.sethUnitNum(hUnitNum);
+        add.sethZipCode(hZipCode);
+        add.setwCity(wCity);
+        add.setwPhone(wPhone);
+        add.setwState(WState);
+        add.setwStreet(wStreet);
+        add.setwUnitNum(wUnitNo);
+        add.setwZipCode(wZipCode);
+        
+        
+        JOptionPane.showMessageDialog(null, "Account Successfully Updated");
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -482,7 +516,35 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
     private void WtxtState2jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WtxtState2jTextField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_WtxtState2jTextField8ActionPerformed
-
+ private void refreshTextFields(){
+        txtFirstName.setText(person.getFirstName());
+        jTextField1.setText(person.getLastName());
+        jTextField2.setText(Double.toString(person.getAge()));
+        jTextField3.setText(person.getGender());
+        jTextField4.setText(person.getEmail());
+ 
+        HtxtStreetAddress.setText(add.gethStreet());
+        HtxtUnitNo.setText(add.gethUnitNum());
+        HtxtCity.setText(add.gethCity());
+        HtxtState.setText(add.gethState());
+        HtxtZip.setText(Long.toString(add.gethZipCode()));
+        HtxtPhoneNo.setText(Double.toString(add.gethPhone()));
+        WtxtStreetAddress2.setText(add.getwStreet());
+        WtxtUnitNo2.setText(add.getwUnitNum());
+        WtxtCity3.setText(add.getwCity());
+        WtxtState2.setText(add.getwState());
+        WtxtZip1.setText(Long.toString(add.getwZipCode()));
+        WtxtPhoneNo2.setText(Double.toString(add.getwPhone()));
+        
+        
+       
+    
+    
+    
+    
+    
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField HtxtCity;
@@ -491,23 +553,15 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField HtxtStreetAddress;
     private javax.swing.JTextField HtxtUnitNo;
     private javax.swing.JTextField HtxtZip;
-    private javax.swing.JTextField WtxtCity2;
     private javax.swing.JTextField WtxtCity3;
-    private javax.swing.JTextField WtxtPhoneNo1;
     private javax.swing.JTextField WtxtPhoneNo2;
-    private javax.swing.JTextField WtxtState1;
     private javax.swing.JTextField WtxtState2;
-    private javax.swing.JTextField WtxtStreetAddress1;
     private javax.swing.JTextField WtxtStreetAddress2;
-    private javax.swing.JTextField WtxtUnitNo1;
     private javax.swing.JTextField WtxtUnitNo2;
-    private javax.swing.JTextField WtxtZip;
     private javax.swing.JTextField WtxtZip1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -515,13 +569,6 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -530,14 +577,11 @@ public class ViewProfileJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstNmae;

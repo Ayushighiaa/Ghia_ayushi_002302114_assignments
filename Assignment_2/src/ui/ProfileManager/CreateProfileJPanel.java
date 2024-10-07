@@ -24,7 +24,7 @@ public class CreateProfileJPanel extends javax.swing.JPanel {
         
         this.userProcessContainer= userProcessContainer;
         this.personDirectory = personDirectory;
-        initComponents();
+      
     }
 
     /**
@@ -407,7 +407,7 @@ public class CreateProfileJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int balance;
+       
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         int Ssn= Integer.parseInt(txtSsn.getText());
@@ -418,13 +418,13 @@ public class CreateProfileJPanel extends javax.swing.JPanel {
         String hUnitNum = HtxtUnitNo.getText();
         String hCity = HtxtCity.getText();
         String hState = HtxtState.getText();
-        Long hZipCode = Long.parseLong(HtxtZip.getText());
-        double hphone = Double.parseDouble(HtxtPhoneNo.getText());
+        Long hZipCode = Long.valueOf(HtxtZip.getText());
+        double hPhone = Double.parseDouble(HtxtPhoneNo.getText());
         String wStreet = WtxtStreetAddress1.getText();
         String wUnitNo = WtxtUnitNo1.getText();
         double wPhone  = Double.parseDouble(WtxtPhoneNo1.getText());
         String wCity = WtxtCity2.getText();
-        String WState = WtxtState1.getText();
+        String wState = WtxtState1.getText();
         long wZipCode = Long.parseLong(WtxtZip.getText());
         
         
@@ -432,22 +432,31 @@ public class CreateProfileJPanel extends javax.swing.JPanel {
         
  
 
-        if (firstName.isBlank() || lastName.isBlank() || age.isBlank() || gender.isBlank() ||  email.isBlank() || homeAddress.isBlank() || workAddress.isBlank() )
-            {
-                JOptionPane.showMessageDialog(this,"All fields are mandatory.","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            
-        
-    
-            }
+       
         Person person = personDirectory.addPerson();
-        Address address = personDirectory.addPerson();
+        Address address = personDirectory.addAddress();
+        
 
         person.setFirstName(firstName);
         person.setLastName(lastName);    
         person.setAge(age);                   
         person.setGender(gender);   
         person.setEmail(email);
+        person.setSsn(Ssn);
+        address.sethCity(hCity);
+        address.sethPhone(hPhone);
+        address.sethState(hState);
+        address.sethStreet(hStreet);
+        address.sethUnitNum(hUnitNum);
+        address.sethZipCode(hZipCode);
+        address.setwCity(wCity);
+        address.setwPhone(wPhone);
+        address.setwState(wState);
+        address.setwStreet(wStreet);
+        address.setwUnitNum(wUnitNo);
+        address.setwZipCode(wZipCode);
+        
+        
         
         
 
@@ -457,6 +466,21 @@ public class CreateProfileJPanel extends javax.swing.JPanel {
         txtSsn.setText("");
         txtAge.setText("");
         txtGender.setText("");
+        txtLastName.setText("");
+        txtEmail.setText("");
+        HtxtStreetAddress.setText("");
+        HtxtUnitNo.setText("");
+        HtxtPhoneNo.setText("");
+        HtxtState.setText("");
+        HtxtCity.setText("");
+        HtxtZip.setText("");
+        WtxtStreetAddress1.setText("");
+        WtxtUnitNo1.setText("");
+        WtxtPhoneNo1.setText("");
+        WtxtState1.setText("");
+        WtxtCity2.setText("");
+        WtxtZip.setText("");
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNameActionPerformed

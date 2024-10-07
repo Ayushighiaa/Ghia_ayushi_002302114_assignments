@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ayushighia
@@ -17,6 +19,7 @@ public class Person {
     private String gender;
     private String email;
     private Address address;
+    private ArrayList<Address> addresses;
 
     public String getFirstName() {
         return firstName;
@@ -66,12 +69,28 @@ public class Person {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+ public ArrayList<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    // Setter for all addresses
+    public void setAddresses(ArrayList<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    // Convenience methods to get Home and Work addresses
+    public Address getHomeAddress() {
+        if (addresses != null && !addresses.isEmpty()) {
+            return addresses.get(0);  // Assuming the home address is at index 0
+        }
+        return null;  // Return null if not available
+    }
+
+    public Address getWorkAddress() {
+        if (addresses != null && addresses.size() > 1) {
+            return addresses.get(1);  // Assuming the work address is at index 1
+        }
+        return null;  // Return null if not available
     }
     
    

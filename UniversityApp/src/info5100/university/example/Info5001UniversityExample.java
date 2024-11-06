@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-// all the packages and import statements
 package info5100.university.example;
 
 import info5100.university.example.CourseCatalog.Course;
@@ -23,42 +17,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author kal bugrara
  */
 public class Info5001UniversityExample {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // Initialize the Department
-        Department department = new Department("Computer Science");
+        Department department = new Department("Information Technology");
 
         // Course Catalog Management
         CourseCatalog courseCatalog = department.getCourseCatalog();
-        Course coreCourse = courseCatalog.newCourse("Software Engineering", "CS5100", 4);
-        Course elective1 = courseCatalog.newCourse("User Experience Design", "CS5200", 4);
-        Course elective2 = courseCatalog.newCourse("Artificial Intelligence", "CS5300", 4);
-        Course elective3 = courseCatalog.newCourse("Network Security", "CS5400", 4);
-        Course elective4 = courseCatalog.newCourse("Distributed Systems", "CS5500", 4);
-        Course elective5 = courseCatalog.newCourse("Data Mining", "CS5600", 4);
+        Course mainCourse = courseCatalog.newCourse("Advanced Programming", "IT1010", 4);
+        Course electiveA = courseCatalog.newCourse("Human-Computer Interaction", "IT2020", 4);
+        Course electiveB = courseCatalog.newCourse("Machine Learning", "IT3030", 4);
+        Course electiveC = courseCatalog.newCourse("Cloud Computing", "IT4040", 4);
+        Course electiveD = courseCatalog.newCourse("Big Data Analytics", "IT5050", 4);
+        Course electiveE = courseCatalog.newCourse("Cybersecurity Essentials", "IT6060", 4);
 
         // Faculty Directory Management
         FacultyDirectory facultyDirectory = department.getFacultyDirectory();
-        FacultyProfile faculty1 = facultyDirectory.newFacultyProfile(new Person("Dr. Alice Johnson"));
-        FacultyProfile faculty2 = facultyDirectory.newFacultyProfile(new Person("Dr. Bob Smith"));
-        FacultyProfile faculty3 = facultyDirectory.newFacultyProfile(new Person("Dr. Charlie Brown"));
-        FacultyProfile faculty4 = facultyDirectory.newFacultyProfile(new Person("Dr. David Wilson"));
-        FacultyProfile faculty5 = facultyDirectory.newFacultyProfile(new Person("Dr. Emily Davis"));
-        FacultyProfile faculty6 = facultyDirectory.newFacultyProfile(new Person("Dr. Frank Miller"));
+        FacultyProfile prof1 = facultyDirectory.newFacultyProfile(new Person("Dr. Sophia Williams"));
+        FacultyProfile prof2 = facultyDirectory.newFacultyProfile(new Person("Dr. Jack Taylor"));
+        FacultyProfile prof3 = facultyDirectory.newFacultyProfile(new Person("Dr. Olivia Harris"));
+        FacultyProfile prof4 = facultyDirectory.newFacultyProfile(new Person("Dr. Liam Martin"));
+        FacultyProfile prof5 = facultyDirectory.newFacultyProfile(new Person("Dr. Noah Clark"));
+        FacultyProfile prof6 = facultyDirectory.newFacultyProfile(new Person("Dr. Mia Walker"));
 
-        // Course Schedule Management for Fall 2024 Semester
-        CourseSchedule courseSchedule = department.newCourseSchedule("Fall2024");
-        createCourseOffers(courseSchedule, coreCourse, elective1, elective2, elective3, elective4, elective5, faculty1, faculty2, faculty3, faculty4, faculty5, faculty6);
+        // Course Schedule Management for Spring 2025 Semester
+        CourseSchedule courseSchedule = department.newCourseSchedule("Spring2025");
+        createCourseOffers(courseSchedule, mainCourse, electiveA, electiveB, electiveC, electiveD, electiveE, prof1, prof2, prof3, prof4, prof5, prof6);
 
         // Student Directory and Registration
-        Map<String, StudentProfile> students = registerStudents(department, courseSchedule, coreCourse, elective1, elective2, elective3, elective4, elective5);
+        Map<String, StudentProfile> students = registerStudents(department, courseSchedule, mainCourse, electiveA, electiveB, electiveC, electiveD, electiveE);
 
         // Set Faculty Ratings
         setFacultyRatings(courseSchedule);
@@ -67,68 +57,68 @@ public class Info5001UniversityExample {
         generateSemesterReport(students, courseSchedule);
 
         // Calculate and display total department revenue
-        int totalRevenue = department.calculateRevenuesBySemester("Fall2024");
-        System.out.println("Overall Department Earnings for Fall 2024: $" + totalRevenue);
+        int totalRevenue = department.calculateRevenuesBySemester("Spring2025");
+        System.out.println("Total Department Earnings for Spring 2025: $" + totalRevenue);
     }
 
-    private static void createCourseOffers(CourseSchedule courseSchedule, Course coreCourse, Course elective1,
-                                            Course elective2, Course elective3, Course elective4, Course elective5, FacultyProfile faculty1,
-                                            FacultyProfile faculty2, FacultyProfile faculty3, FacultyProfile faculty4, FacultyProfile faculty5, FacultyProfile faculty6) {
+    private static void createCourseOffers(CourseSchedule courseSchedule, Course mainCourse, Course electiveA,
+                                            Course electiveB, Course electiveC, Course electiveD, Course electiveE, FacultyProfile prof1,
+                                            FacultyProfile prof2, FacultyProfile prof3, FacultyProfile prof4, FacultyProfile prof5, FacultyProfile prof6) {
         // Create course offers and assign faculty members
-        CourseOffer offerCore = courseSchedule.newCourseOffer(coreCourse.getCOurseNumber());
-        offerCore.AssignAsTeacher(faculty1);
-        offerCore.generatSeats(10);
+        CourseOffer offerMain = courseSchedule.newCourseOffer(mainCourse.getCOurseNumber());
+        offerMain.AssignAsTeacher(prof1);
+        offerMain.generatSeats(12);
 
-        CourseOffer offerElective1 = courseSchedule.newCourseOffer(elective1.getCOurseNumber());
-        offerElective1.AssignAsTeacher(faculty2);
-        offerElective1.generatSeats(10);
+        CourseOffer offerElectiveA = courseSchedule.newCourseOffer(electiveA.getCOurseNumber());
+        offerElectiveA.AssignAsTeacher(prof2);
+        offerElectiveA.generatSeats(12);
 
-        CourseOffer offerElective2 = courseSchedule.newCourseOffer(elective2.getCOurseNumber());
-        offerElective2.AssignAsTeacher(faculty3);
-        offerElective2.generatSeats(10);
+        CourseOffer offerElectiveB = courseSchedule.newCourseOffer(electiveB.getCOurseNumber());
+        offerElectiveB.AssignAsTeacher(prof3);
+        offerElectiveB.generatSeats(12);
 
-        CourseOffer offerElective3 = courseSchedule.newCourseOffer(elective3.getCOurseNumber());
-        offerElective3.AssignAsTeacher(faculty4);
-        offerElective3.generatSeats(10);
+        CourseOffer offerElectiveC = courseSchedule.newCourseOffer(electiveC.getCOurseNumber());
+        offerElectiveC.AssignAsTeacher(prof4);
+        offerElectiveC.generatSeats(12);
 
-        CourseOffer offerElective4 = courseSchedule.newCourseOffer(elective4.getCOurseNumber());
-        offerElective4.AssignAsTeacher(faculty5);
-        offerElective4.generatSeats(10);
+        CourseOffer offerElectiveD = courseSchedule.newCourseOffer(electiveD.getCOurseNumber());
+        offerElectiveD.AssignAsTeacher(prof5);
+        offerElectiveD.generatSeats(12);
 
-        CourseOffer offerElective5 = courseSchedule.newCourseOffer(elective5.getCOurseNumber());
-        offerElective5.AssignAsTeacher(faculty6);
-        offerElective5.generatSeats(10);
+        CourseOffer offerElectiveE = courseSchedule.newCourseOffer(electiveE.getCOurseNumber());
+        offerElectiveE.AssignAsTeacher(prof6);
+        offerElectiveE.generatSeats(12);
 
-        // Assuming you need to keep a list of course offers in CourseSchedule
-        courseSchedule.addCourseOffer(offerCore);
-        courseSchedule.addCourseOffer(offerElective1);
-        courseSchedule.addCourseOffer(offerElective2);
-        courseSchedule.addCourseOffer(offerElective3);
-        courseSchedule.addCourseOffer(offerElective4);
-        courseSchedule.addCourseOffer(offerElective5);
+        // Add course offers to the schedule
+        courseSchedule.addCourseOffer(offerMain);
+        courseSchedule.addCourseOffer(offerElectiveA);
+        courseSchedule.addCourseOffer(offerElectiveB);
+        courseSchedule.addCourseOffer(offerElectiveC);
+        courseSchedule.addCourseOffer(offerElectiveD);
+        courseSchedule.addCourseOffer(offerElectiveE);
     }
 
     private static Map<String, StudentProfile> registerStudents(Department department, CourseSchedule courseSchedule,
-                                                                Course coreCourse, Course elective1, Course elective2, Course elective3, Course elective4, Course elective5) {
+                                                                Course mainCourse, Course electiveA, Course electiveB, Course electiveC, Course electiveD, Course electiveE) {
         PersonDirectory personDirectory = department.getPersonDirectory();
         StudentDirectory studentDirectory = department.getStudentDirectory();
         Map<String, StudentProfile> students = new HashMap<>();
 
-        for (int i = 1; i <= 10; i++) {
-            Person person = personDirectory.newPerson("22222" + i);
+        for (int i = 1; i <= 8; i++) {
+            Person person = personDirectory.newPerson("33333" + i);
             StudentProfile student = studentDirectory.newStudentProfile(person);
-            students.put("Learner" + i, student);
+            students.put("Student" + i, student);
 
-            // Course load for Fall 2024 semester
-            CourseLoad courseLoad = student.newCourseLoad("Fall2024");
+            // Course load for Spring 2025 semester
+            CourseLoad courseLoad = student.newCourseLoad("Spring2025");
 
-            // Use the correct method to get course offers by number
-            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(coreCourse.getCOurseNumber()));
-            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective1.getCOurseNumber()));
-            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective2.getCOurseNumber()));
-            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective3.getCOurseNumber()));
-            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective4.getCOurseNumber()));
-            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elective5.getCOurseNumber()));
+            // Assign courses to students
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(mainCourse.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(electiveA.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(electiveB.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(electiveC.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(electiveD.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(electiveE.getCOurseNumber()));
         }
         return students;
     }
@@ -142,27 +132,27 @@ public class Info5001UniversityExample {
         if (courseOffers.length > 0 && courseOffers[0].getFacultyProfile() != null) {
             FacultyAssignment assignment1 = courseOffers[0].getFacultyProfile().getFacultyAssignment();
             if (assignment1 != null) {
-                assignment1.setProfRating(4.6); // For core course
+                assignment1.setProfRating(4.8); // For main course
             }
         }
 
         if (courseOffers.length > 1 && courseOffers[1].getFacultyProfile() != null) {
             FacultyAssignment assignment2 = courseOffers[1].getFacultyProfile().getFacultyAssignment();
             if (assignment2 != null) {
-                assignment2.setProfRating(3.9); // For elective courses
+                assignment2.setProfRating(4.2); // For elective courses
             }
         } else {
-            System.out.println("Insufficient course offers available.");
+            System.out.println("Not enough course offers available.");
         }
     }
 
     private static void generateSemesterReport(Map<String, StudentProfile> students, CourseSchedule courseSchedule) {
-        System.out.println("=== Fall 2024 Semester Overview ===");
+        System.out.println("=== Spring 2025 Semester Summary ===");
 
         for (StudentProfile student : students.values()) {
-            System.out.println("Learner ID: " + student.getPerson().getPersonId());
+            System.out.println("Student ID: " + student.getPerson().getPersonId());
             System.out.println("Courses Enrolled:");
-            CourseLoad courseLoad = student.getCourseLoadBySemester("Fall2024");
+            CourseLoad courseLoad = student.getCourseLoadBySemester("Spring2025");
             double totalCredits = 0.0;
             double totalGradePoints = 0.0;
 
@@ -173,7 +163,7 @@ public class Info5001UniversityExample {
 
                 // Simulating grade calculation
                 double grade = Math.random() * 4; // Random grade between 0 and 4
-                System.out.println("   Score: " + grade);
+                System.out.println("   Grade: " + grade);
                 totalCredits += courseOffer.getSubjectCourse().getCredits();
                 totalGradePoints += grade * courseOffer.getSubjectCourse().getCredits();
             }
@@ -181,9 +171,9 @@ public class Info5001UniversityExample {
             double gpa = totalCredits == 0 ? 0 : totalGradePoints / totalCredits;
             System.out.println("Overall GPA for Semester: " + gpa);
 
-            // Calculate Tuition Fees (Assume $1200 per credit)
-            double tuitionFees = totalCredits * 1200;
-            System.out.println("Tuition Fees for Learner ID " + student.getPerson().getPersonId() + ": $" + tuitionFees);
+            // Calculate Tuition Fees (Assume $1500 per credit)
+            double tuitionFees = totalCredits * 1500;
+            System.out.println("Tuition Fees for Student ID " + student.getPerson().getPersonId() + ": $" + tuitionFees);
         }
     }
 }
